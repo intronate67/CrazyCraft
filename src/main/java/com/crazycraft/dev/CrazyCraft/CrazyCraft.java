@@ -2,6 +2,7 @@ package com.crazycraft.dev.CrazyCraft;
 
 import com.crazycraft.dev.CrazyCraft.commands.*;
 import com.crazycraft.dev.CrazyCraft.events.JoinListener;
+import com.crazycraft.dev.CrazyCraft.events.QuitListener;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -22,25 +23,24 @@ public class CrazyCraft extends JavaPlugin{
     }
 
     public File homeFile;
-    public File configFile;
-    public FileConfiguration config;
+    public FileConfiguration config = getConfig();
     public FileConfiguration homeConf;
 
     @Override
     public void onEnable(){
-
+        instance = this;
         if(!getDataFolder().exists()){
             getDataFolder().mkdir();
             saveDefaultConfig();
             saveConfig();
         }
         homeFile = new File(getDataFolder(), "homes.yml");
-        configFile = new File(getDataFolder(), "config.yml");
 
         //Registering events
         PluginManager pm = Bukkit.getPluginManager();
         pm.registerEvents(new Freeze(), this);
         pm.registerEvents(new God(), this);
+        pm.registerEvents(new QuitListener(), this);
         pm.registerEvents(new JoinListener(), this);
 
         //Command Executors
@@ -75,8 +75,6 @@ public class CrazyCraft extends JavaPlugin{
         }catch(Exception e){
             e.printStackTrace();
         }
-
-        config = new YamlConfiguration();
         homeConf = new YamlConfiguration();
         homeConf.options().copyDefaults(true);
         config.options().copyDefaults(true);
@@ -90,10 +88,6 @@ public class CrazyCraft extends JavaPlugin{
     }
 
     private void loadConfig() throws Exception{
-        if(!configFile.exists()){
-            configFile.getParentFile().mkdirs();
-            copy(getResource("config.yml"), configFile);
-        }
         if(!homeFile.exists()){
             homeFile.getParentFile().mkdirs();
             copy(getResource("homes.yml"), homeFile);
@@ -115,8 +109,7 @@ public class CrazyCraft extends JavaPlugin{
     }
 
     public void loadYamls() {
-        try {
-            config.load(configFile); //loads the contents of the File to its FileConfiguration
+        try {//loads the contents of the File to its FileConfiguration
             homeConf.load(homeFile);
         } catch (Exception e) {
             e.printStackTrace();
@@ -125,7 +118,6 @@ public class CrazyCraft extends JavaPlugin{
 
     public void saveYaml(){
         try{
-            config.save(configFile);
             homeConf.save(homeFile);
         }catch(IOException e){
             e.printStackTrace();

@@ -22,19 +22,15 @@ public class Home implements CommandExecutor {
         }
         Player p = (Player) sender;
         if(args.length == 0) {
-            if (!CrazyCraft.getInstance().homeConf.contains(p.getName())) {
-                p.sendMessage("nope");
-                return true;
-            }
-            if (CrazyCraft.getInstance().homeConf.getString("players." + p.getName() + "home") == null) {
+            if (CrazyCraft.getInstance().homeConf.getString("players." + p.getName() + "home").equals(null)) {
                 p.sendMessage("You do not have a home!");
                 return true;
             }
             FileConfiguration config = CrazyCraft.getInstance().homeConf;
             World world = Bukkit.getWorld(config.getString("players." + p.getName() + "home.world"));
-            double x = config.getDouble("players." + p.getName() + "home.x");
-            double y = config.getDouble("players." + p.getName() + "home.x");
-            double z = config.getDouble("players." + p.getName() + "home.x");
+            double x = config.getDouble("players." + p.getName() + ".home.x");
+            double y = config.getDouble("players." + p.getName() + ".home.x");
+            double z = config.getDouble("players." + p.getName() + ".home.x");
             Location loc = new Location(world, x, y + 1, z);
             p.teleport(loc);
             p.sendMessage("Welcome to your home!");
@@ -47,11 +43,12 @@ public class Home implements CommandExecutor {
         if(args[0].equalsIgnoreCase("set")){
             FileConfiguration config = CrazyCraft.getInstance().homeConf;
             Location loc = p.getLocation();
-            config.set("players." + p.getName() + "home.world", loc.getWorld().getName());
-            config.set("players." + p.getName() + "home.world", loc.getWorld().getName());
-            config.set("players." + p.getName() + "home.world", loc.getWorld().getName());
-            config.set("players." + p.getName() + "home.world", loc.getWorld().getName());
+            config.set("players." + p.getName() + ".home.world", loc.getWorld().getName());
+            config.set("players." + p.getName() + ".home.x", loc.getX());
+            config.set("players." + p.getName() + ".home.y", loc.getY());
+            config.set("players." + p.getName() + ".home.z", loc.getZ());
             p.sendMessage("Home set.");
+            CrazyCraft.getInstance().saveYaml();
         }else{
             p.sendMessage("Incorrect command usage!");
         }

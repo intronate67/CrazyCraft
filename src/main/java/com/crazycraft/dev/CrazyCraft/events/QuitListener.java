@@ -3,21 +3,19 @@ package com.crazycraft.dev.CrazyCraft.events;
 import com.crazycraft.dev.CrazyCraft.CrazyCraft;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 /**
  * Created by Server on 7/12/2014.
  */
-public class JoinListener implements Listener{
+public class QuitListener implements Listener{
 
     @EventHandler
-    public void onPlayerJoinEvent(PlayerJoinEvent e){
+    public void onPlayerQuit(PlayerQuitEvent e){
         FileConfiguration config = CrazyCraft.getInstance().config;
-        if(config.contains(e.getPlayer().getName())){
-            return;
-        }
         Location loc = e.getPlayer().getLocation();
         config.set("players."  + e.getPlayer().getName() + ".location.world", loc.getWorld().getName());
         config.set("players."  + e.getPlayer().getName() + ".location.X", loc.getX());
