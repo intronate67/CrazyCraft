@@ -22,15 +22,15 @@ public class Home implements CommandExecutor {
         }
         Player p = (Player) sender;
         if(args.length == 0) {
-            if (CrazyCraft.getInstance().homeConf.getString("players." + p.getName() + "home").equals(null)) {
+            if (!CrazyCraft.getInstance().homeConf.contains("players." + p.getName())) {
                 p.sendMessage("You do not have a home!");
                 return true;
             }
             FileConfiguration config = CrazyCraft.getInstance().homeConf;
-            World world = Bukkit.getWorld(config.getString("players." + p.getName() + "home.world"));
+            World world = Bukkit.getWorld(config.getString("players." + p.getName() + ".home.world"));
             double x = config.getDouble("players." + p.getName() + ".home.x");
-            double y = config.getDouble("players." + p.getName() + ".home.x");
-            double z = config.getDouble("players." + p.getName() + ".home.x");
+            double y = config.getDouble("players." + p.getName() + ".home.y");
+            double z = config.getDouble("players." + p.getName() + ".home.z");
             Location loc = new Location(world, x, y + 1, z);
             p.teleport(loc);
             p.sendMessage("Welcome to your home!");

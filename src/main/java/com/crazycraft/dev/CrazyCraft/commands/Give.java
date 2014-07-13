@@ -30,7 +30,7 @@ public class Give implements CommandExecutor{
         }
         if(args.length == 2){
             if(args[0].equalsIgnoreCase(p.getName())){
-                ItemStack itemStack = new ItemStack(Material.getMaterial(args[1]), 64);
+                ItemStack itemStack = new ItemStack(Material.getMaterial(args[1].toUpperCase()), 64);
                 p.sendMessage("Gave you 64 of " + args[1]);
                 p.getInventory().addItem(itemStack);
                 return true;
@@ -44,7 +44,7 @@ public class Give implements CommandExecutor{
             }
             Player targetPlayer = Bukkit.getPlayer(response.get(args[0]));
             if(targetPlayer != null){
-                ItemStack itemStack = new ItemStack((Material.getMaterial(args[1])), 64);
+                ItemStack itemStack = new ItemStack((Material.getMaterial(args[1].toUpperCase())), 64);
                 targetPlayer.getInventory().addItem(itemStack);
                 p.sendMessage("Gave player: " + args[0] + " 64 of " + args[1]);
                 return true;
@@ -54,8 +54,8 @@ public class Give implements CommandExecutor{
         }
         if(args.length == 3){
             if(args[0].equalsIgnoreCase(p.getName())){
-                ItemStack itemStack = new ItemStack(Material.getMaterial(args[1]), Integer.parseInt(args[2]));
-                p.sendMessage("Gave you" + args[2] + " of " + args[1]);
+                ItemStack itemStack = new ItemStack(Material.getMaterial(args[1].toUpperCase()), Integer.parseInt(args[2]));
+                p.sendMessage("Gave you " + args[2] + " of " + args[1]);
                 p.getInventory().addItem(itemStack);
                 return true;
             }
@@ -68,7 +68,7 @@ public class Give implements CommandExecutor{
             }
             Player targetPlayer = Bukkit.getPlayer(response.get(args[0]));
             if(targetPlayer != null){
-                ItemStack itemStack = new ItemStack((Material.getMaterial(args[1])), Integer.parseInt(args[2]));
+                ItemStack itemStack = new ItemStack((Material.getMaterial(args[1].toUpperCase())), Integer.parseInt(args[2]));
                 targetPlayer.getInventory().addItem(itemStack);
                 p.sendMessage("Gave player: " + args[0] + args[2] + " of " + args[1]);
                 return true;
