@@ -26,12 +26,4 @@ public class UnAfk implements CommandExecutor {
         Bukkit.getServer().broadcastMessage(p.getName() + " is no longer afk.");
         return true;
     }
-
-    public String help(Player p){
-        return "";
-    }
-    public String permission(){
-        return "";
-    }
-
 }

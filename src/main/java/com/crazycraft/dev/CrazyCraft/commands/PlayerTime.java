@@ -18,29 +18,33 @@ public class PlayerTime implements CommandExecutor {
             return true;
         }
         Player p = (Player) sender;
-        if(args[1].contains(Arrays.asList("day", "night", "dawn", "morning", "noon", "dusk").toString())){
-            if(args[1].equalsIgnoreCase("day")){ //Set time to day.
+        if(args[0].equalsIgnoreCase("day")
+                || args[0].equalsIgnoreCase("night")
+                || args[0].equalsIgnoreCase("noon")
+                || args[0].equalsIgnoreCase("dusk")
+                || args[0].equalsIgnoreCase("dawn")){
+            if(args[0].equalsIgnoreCase("day")){ //Set time to day.
                 p.getWorld().setThundering(false);
                 p.setPlayerTime(8000, true);
                 p.sendMessage("Time set to morning.(8:00 A.M)");
                 return true;
             }
-            if(args[1].equalsIgnoreCase("night")){
+            if(args[0].equalsIgnoreCase("night")){
                 p.setPlayerTime(21000, true);
                 p.sendMessage("Time set to night.(9:00 P.M)");
                 return true;
             }
-            if(args[1].equalsIgnoreCase("dawn")){
+            if(args[0].equalsIgnoreCase("dawn")){
                 p.setPlayerTime(6000, true);
                 p.sendMessage("Time set to dawn.(6:00 A.M)");
                 return true;
             }
-            if(args[1].equalsIgnoreCase("noon")){
+            if(args[0].equalsIgnoreCase("noon")){
                 p.setPlayerTime(12000, true);
                 p.sendMessage("Time set to noon.(12:00 P.M)");
                 return true;
             }
-            if(args[1].equalsIgnoreCase("dusk")){
+            if(args[0].equalsIgnoreCase("dusk")){
                 p.setPlayerTime(17000, true);
                 p.sendMessage("Time set to night.(5:00 P.M)");
                 return true;
