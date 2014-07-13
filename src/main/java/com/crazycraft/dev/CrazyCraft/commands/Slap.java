@@ -1,6 +1,6 @@
 package com.crazycraft.dev.CrazyCraft.commands;
 
-import com.crazycraft.dev.CrazyCraft.UUIDGetter;
+import com.PUUID;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -9,8 +9,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
-import java.util.Arrays;
-import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -31,15 +29,9 @@ public class Slap implements CommandExecutor {
         if(args.length < 1 || args.length > 2){
             p.sendMessage("Incorrect Usage");
         }
-        UUIDGetter getter = new UUIDGetter(Arrays.asList(args[0]));
-        Map<String, UUID> response = null;
-        try{
-            response = getter.call();
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        if(Bukkit.getPlayer(response.get(args[0])) != null){
-            Player targetPlayer = Bukkit.getPlayer(response.get(args[0]));
+
+        if(Bukkit.getPlayer(UUID.fromString(PUUID.getUUID(args[0]))) != null){
+            Player targetPlayer = Bukkit.getPlayer(UUID.fromString(PUUID.getUUID(args[0])));
             if(args.length != 2){
                 targetPlayer.setVelocity(new Vector(0, 2, 20));
                 Bukkit.broadcastMessage(ChatColor.BLUE + p.getName() + ChatColor.GRAY + " slapped "+ ChatColor.BLUE + targetPlayer.getName());

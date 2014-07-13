@@ -1,6 +1,6 @@
 package com.crazycraft.dev.CrazyCraft.commands;
 
-import com.crazycraft.dev.CrazyCraft.UUIDGetter;
+import com.PUUID;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -35,14 +35,8 @@ public class Freeze implements Listener, CommandExecutor{
             p.sendMessage("Nope.");
             return true;
         }
-        UUIDGetter getter = new UUIDGetter(Arrays.asList(args[1]));
-        Map<String, UUID> response = null;
-        try{
-            response = getter.call();
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        Player targetPlayer = Bukkit.getPlayer(response.get(args[1]));
+
+        Player targetPlayer = Bukkit.getPlayer(UUID.fromString(PUUID.getUUID(args[0])));
         isFrozen.add(targetPlayer.getUniqueId());
         targetPlayer.sendMessage("You are now frozen.");
         p.sendMessage("You have frozen player: " + targetPlayer.getName());

@@ -1,6 +1,6 @@
 package com.crazycraft.dev.CrazyCraft.commands;
 
-import com.crazycraft.dev.CrazyCraft.UUIDGetter;
+import com.PUUID;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -31,14 +31,7 @@ public class Mute implements CommandExecutor {
         if(args.length != 1){
             p.sendMessage("Nope");
         }
-        UUIDGetter getter = new UUIDGetter(Arrays.asList(args[0]));
-        Map<String, UUID> response = null;
-        try{
-            response = getter.call();
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        Player targetPlayer = Bukkit.getPlayer(response.get(args[0]));
+        Player targetPlayer = Bukkit.getPlayer(UUID.fromString(PUUID.getUUID(args[0])));
         if(!targetPlayer.isOnline()){
             p.sendMessage("Player is not online.");
             return true;

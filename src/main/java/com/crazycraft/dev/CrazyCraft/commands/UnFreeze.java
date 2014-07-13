@@ -1,14 +1,12 @@
 package com.crazycraft.dev.CrazyCraft.commands;
 
-import com.crazycraft.dev.CrazyCraft.UUIDGetter;
+import com.PUUID;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.Arrays;
-import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -27,18 +25,11 @@ public class UnFreeze  implements CommandExecutor {
             p.sendMessage("Nope");
             return true;
         }
-        UUIDGetter getter = new UUIDGetter(Arrays.asList(args[0]));
-        Map<String, UUID> response = null;
-        try{
-            response = getter.call();
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        if(!Freeze.getInstance().isFrozen.contains(response.get(args[0]))){
+        if(!Freeze.getInstance().isFrozen.contains(UUID.fromString(PUUID.getUUID(args[0])))){
             p.sendMessage("Player is not frozen");
         }
-        Freeze.getInstance().isFrozen.remove(response.get(args[0]));
-        Player targetPlayer = Bukkit.getPlayer(response.get(args[0]));
+        Freeze.getInstance().isFrozen.remove(UUID.fromString(PUUID.getUUID(args[0])));
+        Player targetPlayer = Bukkit.getPlayer(UUID.fromString(PUUID.getUUID(args[0])));
         targetPlayer.sendMessage("You have been un-froze.");
         p.sendMessage("You have un-froze player: " + targetPlayer.getName());
         return true;

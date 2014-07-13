@@ -16,7 +16,22 @@ public class Speed implements CommandExecutor {
             return true;
         }
         Player p = (Player) sender;
-
+        if(args.length != 1){
+            p.sendMessage("Incorrect Usage!");
+            return true;
+        }
+        if(!p.hasPermission("cc.speed")){
+            p.sendMessage("You do not haver permission!");
+            return true;
+        }
+        if(p.isFlying()){
+            p.setFlySpeed(Float.parseFloat(args[0]));
+            p.sendMessage("Set your fly speed to: " + args[0]);
+            return true;
+        }else{
+            p.setWalkSpeed(Float.parseFloat(args[0]));
+            p.sendMessage("Set your walk speed to: " + args[0]);
+        }
         return true;
     }
 

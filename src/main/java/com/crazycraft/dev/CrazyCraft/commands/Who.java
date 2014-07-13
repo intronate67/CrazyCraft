@@ -1,5 +1,6 @@
 package com.crazycraft.dev.CrazyCraft.commands;
 
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -16,7 +17,16 @@ public class Who implements CommandExecutor {
             return true;
         }
         Player p = (Player) sender;
+        if(args.length != 0){
+            p.sendMessage("Nope");
             return true;
+        }
+        int players = Bukkit.getServer().getOnlinePlayers().size();
+        int maxPlayers = Bukkit.getServer().getMaxPlayers();
+
+        p.sendMessage("Online players: " + players + "/" + maxPlayers);
+
+        return true;
     }
 
     public String help(Player p){

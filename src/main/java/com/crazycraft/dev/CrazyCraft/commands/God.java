@@ -19,6 +19,12 @@ public class God implements Listener, CommandExecutor{
 
     public List<UUID> isGod = new ArrayList<UUID>();
 
+    private static God instance = new God(); //xD Creating a "new God" ;)
+
+    public static God getInstance(){
+        return instance;
+    }
+
     public boolean onCommand(CommandSender sender, Command cmd,String lable ,String[] args){
         if(!(sender instanceof Player)){
             sender.sendMessage("Nope");

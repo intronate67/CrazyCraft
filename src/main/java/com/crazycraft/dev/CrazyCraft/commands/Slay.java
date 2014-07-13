@@ -1,6 +1,6 @@
 package com.crazycraft.dev.CrazyCraft.commands;
 
-import com.crazycraft.dev.CrazyCraft.UUIDGetter;
+import com.PUUID;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -8,8 +8,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.Arrays;
-import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -31,14 +29,8 @@ public class Slay implements CommandExecutor {
             p.sendMessage("You do not have permission!");
             return true;
         }
-        UUIDGetter getter = new UUIDGetter(Arrays.asList(args[0]));
-        Map<String, UUID> response = null;
-        try{
-            response = getter.call();
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        Player targetPlayer = Bukkit.getPlayer(response.get(args[0]));
+
+        Player targetPlayer = Bukkit.getPlayer(UUID.fromString(PUUID.getUUID(args[0])));
         targetPlayer.setHealth(0);
         targetPlayer.setFireTicks(10);
         Bukkit.getServer().broadcastMessage(ChatColor.BLUE + p.getName() + ChatColor.GRAY +" has slayed " + ChatColor.BLUE +targetPlayer.getName());

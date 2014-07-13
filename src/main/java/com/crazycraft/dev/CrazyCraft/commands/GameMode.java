@@ -1,6 +1,6 @@
 package com.crazycraft.dev.CrazyCraft.commands;
 
-import com.crazycraft.dev.CrazyCraft.UUIDGetter;
+import com.PUUID;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -8,8 +8,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.Arrays;
-import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -30,17 +28,9 @@ public class GameMode implements CommandExecutor {
             return true;
         }
         if(args.length == 2){
-            UUIDGetter getter = new UUIDGetter(Arrays.asList(args[1]));
-            Map<String, UUID> response = null;
-            try{
-                response = getter.call();
-            }catch(Exception e){
-                e.printStackTrace();
-            }
-
-            Player targetPlayer = Bukkit.getPlayer(response.get(args[1]));
+            Player targetPlayer = Bukkit.getPlayer(UUID.fromString(PUUID.getUUID(args[1])));
             if(!p.hasPermission("cc.gm.other")) return true;
-            if(args[1].equalsIgnoreCase("1") || args[1].equalsIgnoreCase("creative")){
+            if(args[0].equalsIgnoreCase("1") || args[0].equalsIgnoreCase("creative")){
                 if(targetPlayer.getGameMode().equals(org.bukkit.GameMode.CREATIVE)){
                     return true;
                 }
@@ -49,7 +39,7 @@ public class GameMode implements CommandExecutor {
                 p.sendMessage(ChatColor.YELLOW + "You have changed " + targetPlayer.getName() + "'s gamemode.");
                 return true;
             }
-            if(args[1].equalsIgnoreCase("0") || args[1].equalsIgnoreCase("survival")){
+            if(args[0].equalsIgnoreCase("0") || args[0].equalsIgnoreCase("survival")){
                 if(targetPlayer.getGameMode().equals(org.bukkit.GameMode.SURVIVAL)){
                     return true;
                 }

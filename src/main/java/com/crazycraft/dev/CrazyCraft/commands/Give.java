@@ -1,6 +1,6 @@
 package com.crazycraft.dev.CrazyCraft.commands;
 
-import com.crazycraft.dev.CrazyCraft.UUIDGetter;
+import com.PUUID;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -9,8 +9,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.Arrays;
-import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -29,20 +27,13 @@ public class Give implements CommandExecutor{
             return true;
         }
         if(args.length == 2){
-            if(args[0].equalsIgnoreCase(p.getName())){
+            if(args[0].equalsIgnoreCase(p.getName())) {
                 ItemStack itemStack = new ItemStack(Material.getMaterial(args[1].toUpperCase()), 64);
                 p.sendMessage("Gave you 64 of " + args[1]);
                 p.getInventory().addItem(itemStack);
                 return true;
             }
-            UUIDGetter getter = new UUIDGetter(Arrays.asList(args[0]));
-            Map<String, UUID> response = null;
-            try{
-                response = getter.call();
-            }catch(Exception e){
-                e.printStackTrace();
-            }
-            Player targetPlayer = Bukkit.getPlayer(response.get(args[0]));
+            Player targetPlayer = Bukkit.getPlayer(UUID.fromString(PUUID.getUUID(args[0])));
             if(targetPlayer != null){
                 ItemStack itemStack = new ItemStack((Material.getMaterial(args[1].toUpperCase())), 64);
                 targetPlayer.getInventory().addItem(itemStack);
@@ -59,14 +50,7 @@ public class Give implements CommandExecutor{
                 p.getInventory().addItem(itemStack);
                 return true;
             }
-            UUIDGetter getter = new UUIDGetter(Arrays.asList(args[0]));
-            Map<String, UUID> response = null;
-            try{
-                response = getter.call();
-            }catch(Exception e){
-                e.printStackTrace();
-            }
-            Player targetPlayer = Bukkit.getPlayer(response.get(args[0]));
+            Player targetPlayer = Bukkit.getPlayer(UUID.fromString(PUUID.getUUID(args[0])));
             if(targetPlayer != null){
                 ItemStack itemStack = new ItemStack((Material.getMaterial(args[1].toUpperCase())), Integer.parseInt(args[2]));
                 targetPlayer.getInventory().addItem(itemStack);
