@@ -25,27 +25,27 @@ public class PlayerTime implements CommandExecutor {
                 || args[0].equalsIgnoreCase("dawn")){
             if(args[0].equalsIgnoreCase("day")){ //Set time to day.
                 p.getWorld().setThundering(false);
-                p.setPlayerTime(8000, true);
+                p.setPlayerTime(2000, true);
                 p.sendMessage("Time set to morning.(8:00 A.M)");
                 return true;
             }
             if(args[0].equalsIgnoreCase("night")){
-                p.setPlayerTime(21000, true);
+                p.setPlayerTime(15000, true);
                 p.sendMessage("Time set to night.(9:00 P.M)");
                 return true;
             }
             if(args[0].equalsIgnoreCase("dawn")){
-                p.setPlayerTime(6000, true);
+                p.setPlayerTime(0000, true);
                 p.sendMessage("Time set to dawn.(6:00 A.M)");
                 return true;
             }
             if(args[0].equalsIgnoreCase("noon")){
-                p.setPlayerTime(12000, true);
+                p.setPlayerTime(6000, true);
                 p.sendMessage("Time set to noon.(12:00 P.M)");
                 return true;
             }
             if(args[0].equalsIgnoreCase("dusk")){
-                p.setPlayerTime(17000, true);
+                p.setPlayerTime(11000, true);
                 p.sendMessage("Time set to night.(5:00 P.M)");
                 return true;
             }
