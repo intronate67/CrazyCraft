@@ -16,6 +16,7 @@ public class R implements CommandExecutor {
             return true;
         }
         Player p = (Player) sender;
+        //TODO: Add response mechanics.
         return true;
     }
 

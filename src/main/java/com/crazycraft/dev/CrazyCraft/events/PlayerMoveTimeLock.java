@@ -12,7 +12,7 @@ public class PlayerMoveTimeLock implements Listener{
 
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent e){
-        if(Time.getInstance().isLocked.containsKey(e.getPlayer().getWorld().getName())) return;
+        if(!Time.getInstance().isLocked.containsKey(e.getPlayer().getWorld().getName())) return;
         if(Time.getInstance().isLocked.get(e.getPlayer().getName()).equals("dawn")){
             if(e.getPlayer().getWorld().getTime() != 6000){
                 e.getPlayer().getWorld().setTime(6000);

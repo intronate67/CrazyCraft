@@ -1,5 +1,6 @@
 package com.crazycraft.dev.CrazyCraft.commands;
 
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -16,10 +17,17 @@ public class Tppos implements CommandExecutor {
             return true;
         }
         Player p = (Player) sender;
-
+        if(args.length != 3){
+            p.sendMessage("Nope");
+            return true;
+        }
+        Location loc = new Location(p.getWorld(), Double.parseDouble(args[0]), Double.parseDouble(args[1]), Double.parseDouble(args[2]));
+        p.teleport(loc);
         return true;
     }
-
+    private boolean isInteger(){
+        return false;
+    }
     public String help(Player p){
         return "";
     }
