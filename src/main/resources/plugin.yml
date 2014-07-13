@@ -1,0 +1,63 @@
+name:  ${project.artifactId}
+main: com.crazycraft.dev.CrazyCraft.CrazyCraft
+version:  ${project.version}
+author: [intronate67]
+commands:
+    gm:
+        description: Gamemode command.
+    afk:
+        description: Afk Command
+    clear:
+        description: Clear your inventory.
+    fly:
+        description: Fly Away my child.
+    freeze:
+        description: Freeze a player.
+    give:
+        description: Give an item.
+    god:
+        description: Be invincible.
+    home:
+        description: Go home.
+    kit:
+        description: Get a kit.
+    me:
+        description: Say what you're doing.
+    msg:
+        description: Message other players
+    whisper:
+        description: Whisper to another player.
+    tell:
+        description: Tell another player something.
+    pm:
+        description: Private message a pleyer.
+    mute:
+        description: Mute that hoe.
+    playertime:
+        description: Set time for you.
+    r:
+        description: Respond to another player.
+    seen:
+        description: Se info about offline/online players.
+    slap:
+        description: Slap that hoe.
+    slay:
+        description: Kill that mean person.
+    spawnmob:
+        description: Spawn a mob where you are looking.
+    speed:
+        description: Change your walking/flying speed
+    time:
+        description: Set the time for your world.
+    tppos:
+        description: Teleport to a specific location.
+    unafk:
+        description: Welcome back.
+    unfreeze:
+        description: YOU ARE ALIVE.
+    ungod:
+        description: You are normal again.
+    who:
+        description: Whos online.
+    list:
+        description: List who is online.
