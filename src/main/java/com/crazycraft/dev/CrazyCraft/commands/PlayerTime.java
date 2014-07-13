@@ -46,7 +46,7 @@ public class PlayerTime implements CommandExecutor {
             }
             if(args[0].equalsIgnoreCase("dusk")){
                 p.setPlayerTime(11000, true);
-                p.sendMessage("Time set to night.(5:00 P.M)");
+                p.sendMessage("Time set to dusk.(5:00 P.M)");
                 return true;
             }
             return true;

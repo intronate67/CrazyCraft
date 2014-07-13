@@ -37,40 +37,40 @@ public class Time implements CommandExecutor {
                     isLocked.remove(p.getWorld().getName(), isLocked.get(p.getWorld().getName()));
                     p.sendMessage("You have unlocked the time in your world.");
                 }
-                if(args[1].equalsIgnoreCase("day")
-                        || args[1].equalsIgnoreCase("night")
-                        || args[1].equalsIgnoreCase("noon")
-                        || args[1].equalsIgnoreCase("dusk")
-                        || args[1].equalsIgnoreCase("dawn")){
-                    if(args[1].equalsIgnoreCase("day")){ //Set time to day.
+                if(args[0].equalsIgnoreCase("day")
+                        || args[0].equalsIgnoreCase("night")
+                        || args[0].equalsIgnoreCase("noon")
+                        || args[0].equalsIgnoreCase("dusk")
+                        || args[0].equalsIgnoreCase("dawn")){
+                    if(args[0].equalsIgnoreCase("day")){ //Set time to day.
                         p.getWorld().setThundering(false);
                         p.getWorld().setTime(2000);
                         isLocked.put(p.getWorld().getName(), args[1]);
                         p.sendMessage("Locked the Time to morning.(8:00 A.M)");
                         return true;
                     }
-                    if(args[1].equalsIgnoreCase("night")){
+                    if(args[0].equalsIgnoreCase("night")){
                         p.getWorld().setTime(15000);
                         isLocked.put(p.getWorld().getName(), args[1]);
                         p.sendMessage("Locked the Time to night.(9:00 P.M)");
                         return true;
                     }
-                    if(args[1].equalsIgnoreCase("dawn")){
+                    if(args[0].equalsIgnoreCase("dawn")){
                         p.getWorld().setTime(0000);
                         isLocked.put(p.getWorld().getName(), args[1]);
                         p.sendMessage("Locked the Time to dawn.(6:00 A.M)");
                         return true;
                     }
-                    if(args[1].equalsIgnoreCase("noon")){
+                    if(args[0].equalsIgnoreCase("noon")){
                         p.getWorld().setTime(6000);
                         isLocked.put(p.getWorld().getName(), args[1]);
                         p.sendMessage("Locked the Time to noon.(12:00 P.M)");
                         return true;
                     }
-                    if(args[1].equalsIgnoreCase("dusk")){
+                    if(args[0].equalsIgnoreCase("dusk")){
                         p.getWorld().setTime(11000);
                         isLocked.put(p.getWorld().getName(), args[1]);
-                        p.sendMessage("Locked the Time to night.(5:00 P.M)");
+                        p.sendMessage("Locked the Time to dusk.(5:00 P.M)");
                         return true;
                     }
                     return true;
@@ -109,7 +109,7 @@ public class Time implements CommandExecutor {
             }
             if(args[0].equalsIgnoreCase("dusk")){
                 p.getWorld().setTime(11000);
-                p.sendMessage("Time set to night.(5:00 P.M)");
+                p.sendMessage("Time set to dusk.(5:00 P.M)");
                 return true;
             }
             return true;
