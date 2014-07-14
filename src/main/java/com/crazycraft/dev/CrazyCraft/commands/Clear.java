@@ -1,15 +1,11 @@
 package com.crazycraft.dev.CrazyCraft.commands;
 
-import com.crazycraft.dev.CrazyCraft.UUIDGetter;
+import com.PUUID;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import java.util.Arrays;
-import java.util.Map;
-import java.util.UUID;
 
 /**
  * Created by Server on 7/12/2014.
@@ -37,15 +33,7 @@ public class Clear implements CommandExecutor{
             return true;
         }
         if(args.length == 2){
-            if(!p.hasPermission("cc.clear.other")) return true;
-            UUIDGetter getter = new UUIDGetter(Arrays.asList(args[1]));
-            Map<String, UUID> response = null;
-            try{
-                response = getter.call();
-            }catch(Exception e){
-                e.printStackTrace();
-            }
-            Player targetPlayer = Bukkit.getPlayer(response.get(args[1]));
+            Player targetPlayer = Bukkit.getPlayer(PUUID.getUUID(args[0]));
             targetPlayer.getInventory().clear();
             targetPlayer.sendMessage("You inventory has been cleared by: " + p.getName() + " ;)");
             return true;
