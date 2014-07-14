@@ -74,7 +74,7 @@ public class CrazyCraft extends JavaPlugin{
         getCommand("unfreeze").setExecutor(new UnFreeze());
         getCommand("ungod").setExecutor(new UnGod());
         getCommand("tp").setExecutor(new TP());
-        getCommand("tps").setExecutor(new TPA());
+        getCommand("tpa").setExecutor(new TPA());
         getCommand("tpaccpt").setExecutor(new TPAccept());
         getCommand("tpahere").setExecutor(new TPAHere());
         getCommand("tpallhere").setExecutor(new TPAllHere());
