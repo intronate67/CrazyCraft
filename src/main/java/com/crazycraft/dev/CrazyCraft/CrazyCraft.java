@@ -5,6 +5,7 @@ import com.crazycraft.dev.CrazyCraft.events.JoinListener;
 import com.crazycraft.dev.CrazyCraft.events.MuteListener;
 import com.crazycraft.dev.CrazyCraft.events.PlayerMoveTimeLock;
 import com.crazycraft.dev.CrazyCraft.events.QuitListener;
+import com.crazycraft.dev.CrazyCraft.teleportation.*;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -72,6 +73,18 @@ public class CrazyCraft extends JavaPlugin{
         getCommand("unafk").setExecutor(new UnAfk());
         getCommand("unfreeze").setExecutor(new UnFreeze());
         getCommand("ungod").setExecutor(new UnGod());
+        getCommand("tp").setExecutor(new TP());
+        getCommand("tps").setExecutor(new TPA());
+        getCommand("tpaccpt").setExecutor(new TPAccept());
+        getCommand("tpahere").setExecutor(new TPAHere());
+        getCommand("tpallhere").setExecutor(new TPAllHere());
+        getCommand("tpback").setExecutor(new TPBack());
+        getCommand("tphere").setExecutor(new TPHere());
+        getCommand("tpo").setExecutor(new TPO());
+        getCommand("tpohere").setExecutor(new TPOHere());
+        getCommand("tpreject").setExecutor(new TPReject());
+        getCommand("tpsilent").setExecutor(new TPSilent());
+        getCommand("tptoggle").setExecutor(new TPToggle());
         //Config below
 
         try{
