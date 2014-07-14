@@ -8,10 +8,21 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.HashMap;
+import java.util.UUID;
+
 /**
  * Created by Server on 7/13/2014.
  */
 public class TP implements CommandExecutor{
+
+    public HashMap<UUID, Location> prevLoc = new HashMap<UUID, Location>();
+
+    private static TP instance = new TP();
+
+    public static TP getInstance(){
+        return instance;
+    }
 
     public boolean onCommand(CommandSender sender, Command cmd, String lable, String[] args){
         if(!(sender instanceof Player)){
@@ -34,6 +45,13 @@ public class TP implements CommandExecutor{
                     p.sendMessage("Player has teleportation disabled!");
                     return true;
                 }
+                if(prevLoc.containsKey(p.getUniqueId())){
+                    Location loc = prevLoc.get(p.getUniqueId());
+                    prevLoc.remove(p.getUniqueId(), loc);
+                    prevLoc.put(p.getUniqueId(), p.getLocation());
+                }else{
+                    prevLoc.put(p.getUniqueId(), p.getLocation());
+                }
                 Location loc = targetPlayer.getLocation();
                 p.teleport(loc);
                 p.sendMessage("Teleported " + p.getName() + " to " + targetPlayer.getName());
@@ -51,6 +69,10 @@ public class TP implements CommandExecutor{
                     p.sendMessage("1 or more players have teleportation disabled!");
                     return true;
                 }
+                prevLoc.put(targetPlayer.getUniqueId(), targetPlayer.getLocation());
+                targetPlayer.teleport(receivingPlayer.getLocation());
+                targetPlayer.sendMessage("You have teleported to " + receivingPlayer.getName());
+                receivingPlayer.sendMessage(targetPlayer.getName() + " teleported to you");
                 return true;
             }
             p.sendMessage("1 or more players do not exist an/or is not online!");

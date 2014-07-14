@@ -2,6 +2,7 @@ package com.crazycraft.dev.CrazyCraft.teleportation;
 
 import com.PUUID;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -44,6 +45,13 @@ public class TPAccept implements CommandExecutor{
             return true;
         }else{
             Player requestP = Bukkit.getPlayer(hasRequest.get(p.getName()));
+            if(TP.getInstance().prevLoc.containsKey(requestP.getUniqueId())){
+                Location loc = TP.getInstance().prevLoc.get(requestP.getUniqueId());
+                TP.getInstance().prevLoc.remove(requestP.getUniqueId(), loc);
+                TP.getInstance().prevLoc.put(requestP.getUniqueId(), requestP.getLocation());
+            }else{
+                TP.getInstance().prevLoc.put(requestP.getUniqueId(), requestP.getLocation());
+            }
             requestP.teleport(p.getLocation());
             requestP.sendMessage("Teleported " + requestP.getName() + " to " + p.getName());
             p.sendMessage(requestP.getName() +  " teleported to you.");

@@ -29,10 +29,8 @@ public class TPA implements CommandExecutor{
         }
         Player targetPlayer = Bukkit.getPlayer(PUUID.getUUID(args[0]));
         if(targetPlayer != null){
-            Location loc = targetPlayer.getLocation();
-            p.teleport(loc);
-            p.sendMessage("Teleported " + p.getName() + " to " + targetPlayer.getName());
-            targetPlayer.sendMessage(p.getName() +  " teleported to you.");
+            TPAccept.getInstance().hasRequest.put(p.getUniqueId(), targetPlayer.getName());
+            targetPlayer.sendMessage(p.getName() + " has requested to teleport to you.");
             return true;
         }
         p.sendMessage("Player does not exist and/or is not online!");
