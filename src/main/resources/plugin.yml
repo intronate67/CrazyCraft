@@ -61,3 +61,27 @@ commands:
         description: Whos online.
     list:
         description: List who is online.
+    tp:
+        description: Teleport to people.
+    tpa:
+        description: Request to teleport to people.
+    tpaccept:
+        description: Accept a players request to teleport.
+    tpahere:
+        description: Request a player to teleport to you.
+    tpallhere:
+        description: Tp all players to you.
+    tpback:
+        description: Teleport back to your previous location.
+    tphere:
+        description: Teleport a player to you.
+    tpo:
+        description: Teleport to a player overriding their teleportation option.
+    tpohere:
+        description: Teleport a player to you overriding their teleportation option.
+    tpreject:
+        description: Reject someones requests to teleport to you.
+    tpsilent:
+        description: Teleport to a player with out it telling them.
+    tptoggle:
+        description: Toggle the ability for player to tp to you.
