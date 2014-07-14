@@ -25,28 +25,31 @@ public class PUUID {
    * @return String (UUID)
    */
 
-  public static String getUUID(String name) {
+  public static UUID getUUID(String name) {
 
-    Profile[] profiles = repository.findProfilesByNames(name.toString());
-
-    for (Player p : Bukkit.getOnlinePlayers()) {
-      if (p.getName().equalsIgnoreCase(name)) {
-        return p.getUniqueId().toString();
+      Profile[] profiles = repository.findProfilesByNames(name.toString());
+      UUID pId = null;
+      for (Player p : Bukkit.getOnlinePlayers()) {
+          if (p.getName().equalsIgnoreCase(name)) {
+              return pId = p.getUniqueId();
+          }
       }
-    }
 
-    if (profiles.length == 1) {
+      if (profiles.length == 1) {
 
-      StringBuilder str = new StringBuilder(profiles[0].getId());
-      str.insert(8, "-");
-      str.insert(13, "-");
-      str.insert(18, "-");
-      str.insert(23, "-");
+          StringBuilder str = new StringBuilder(profiles[0].getId());
+          str.insert(8, "-");
+          str.insert(13, "-");
+          str.insert(18, "-");
+          str.insert(23, "-");
 
-      return str.toString();
-    } else
-      return "UUID Not Found";
+          return pId = UUID.fromString(str.toString());
+      } else {
+
+      }
+      return pId;
   }
+
 
   public static String getNameFromUUID (String uuid) {
     return Bukkit.getOfflinePlayer(UUID.fromString(uuid)).getName();

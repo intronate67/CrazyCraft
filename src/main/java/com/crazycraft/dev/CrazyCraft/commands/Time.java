@@ -36,6 +36,7 @@ public class Time implements CommandExecutor {
                 if(isLocked.containsKey(p.getWorld().getName())){
                     isLocked.remove(p.getWorld().getName(), isLocked.get(p.getWorld().getName()));
                     p.sendMessage("You have unlocked the time in your world.");
+                    return true;
                 }
                 if(args[0].equalsIgnoreCase("day")
                         || args[0].equalsIgnoreCase("night")
