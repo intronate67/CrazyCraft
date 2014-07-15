@@ -39,11 +39,4 @@ public class Afk implements CommandExecutor{
         return true;
     }
 
-    public String help(Player p){
-        return "";
-    }
-    public String permission(){
-        return "cc.afk";
-    }
-
 }

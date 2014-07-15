@@ -33,7 +33,7 @@ public class Give implements CommandExecutor{
                 p.getInventory().addItem(itemStack);
                 return true;
             }
-            Player targetPlayer = Bukkit.getPlayer(UUID.fromString(PUUID.getUUID(args[0])));
+            Player targetPlayer = Bukkit.getPlayer(PUUID.getUUID(args[0]));
             if(targetPlayer != null){
                 ItemStack itemStack = new ItemStack((Material.getMaterial(args[1].toUpperCase())), 64);
                 targetPlayer.getInventory().addItem(itemStack);
@@ -50,7 +50,7 @@ public class Give implements CommandExecutor{
                 p.getInventory().addItem(itemStack);
                 return true;
             }
-            Player targetPlayer = Bukkit.getPlayer(UUID.fromString(PUUID.getUUID(args[0])));
+            Player targetPlayer = Bukkit.getPlayer(PUUID.getUUID(args[0]));
             if(targetPlayer != null){
                 ItemStack itemStack = new ItemStack((Material.getMaterial(args[1].toUpperCase())), Integer.parseInt(args[2]));
                 targetPlayer.getInventory().addItem(itemStack);
