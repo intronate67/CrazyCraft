@@ -21,6 +21,7 @@ public class Fly implements CommandExecutor {
             p.sendMessage("You can already fly...");
             return true;
         }
+        p.setAllowFlight(true);
         p.setFlying(true);
         return true;
     }

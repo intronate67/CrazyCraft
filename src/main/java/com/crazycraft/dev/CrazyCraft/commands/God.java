@@ -35,6 +35,10 @@ public class God implements Listener, CommandExecutor{
             p.sendMessage("You are already god.");
             return true;
         }
+        if(!p.hasPermission("cc.god")){
+            p.sendMessage("You do not have permission!");
+            return true;
+        }
         isGod.add(p.getUniqueId());
         return true;
     }
@@ -55,5 +59,6 @@ public class God implements Listener, CommandExecutor{
             e.setDamage(0D);
         }
     }
+
 
 }

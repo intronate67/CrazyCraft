@@ -36,7 +36,7 @@ public class Freeze implements Listener, CommandExecutor{
             return true;
         }
 
-        Player targetPlayer = Bukkit.getPlayer(UUID.fromString(PUUID.getUUID(args[0])));
+        Player targetPlayer = Bukkit.getPlayer(PUUID.getUUID(args[0]));
         isFrozen.add(targetPlayer.getUniqueId());
         targetPlayer.sendMessage("You are now frozen.");
         p.sendMessage("You have frozen player: " + targetPlayer.getName());

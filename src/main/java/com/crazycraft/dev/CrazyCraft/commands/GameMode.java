@@ -28,7 +28,7 @@ public class GameMode implements CommandExecutor {
             return true;
         }
         if(args.length == 2){
-            Player targetPlayer = Bukkit.getPlayer(UUID.fromString(PUUID.getUUID(args[1])));
+            Player targetPlayer = Bukkit.getPlayer(PUUID.getUUID(args[1]));
             if(!p.hasPermission("cc.gm.other")) return true;
             if(args[0].equalsIgnoreCase("1") || args[0].equalsIgnoreCase("creative")){
                 if(targetPlayer.getGameMode().equals(org.bukkit.GameMode.CREATIVE)){

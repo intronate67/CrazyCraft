@@ -2,6 +2,7 @@ package com.crazycraft.dev.CrazyCraft.commands;
 
 import com.PUUID;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -23,7 +24,8 @@ public class Give implements CommandExecutor{
         }
         Player p = (Player) sender;
         if(args.length < 2 || args.length > 3){
-            p.sendMessage("Nope");
+            p.sendMessage(String.format("%sRequired %s- %sVariable %s- %sOptional", ChatColor.RED, ChatColor.DARK_GRAY, ChatColor.DARK_AQUA, ChatColor.DARK_GRAY, ChatColor.GREEN));
+            p.sendMessage(String.format("%s/give <%splayername%s> <%sid%s> %s[%samount%s]", ChatColor.RED, ChatColor.DARK_AQUA, ChatColor.RED, ChatColor.DARK_AQUA, ChatColor.RED, ChatColor.GREEN, ChatColor.DARK_AQUA, ChatColor.GREEN));
             return true;
         }
         if(args.length == 2){
@@ -54,7 +56,7 @@ public class Give implements CommandExecutor{
             if(targetPlayer != null){
                 ItemStack itemStack = new ItemStack((Material.getMaterial(args[1].toUpperCase())), Integer.parseInt(args[2]));
                 targetPlayer.getInventory().addItem(itemStack);
-                p.sendMessage("Gave player: " + args[0] + args[2] + " of " + args[1]);
+                p.sendMessage("Gave player: " + args[0] + " " + args[2] + " of " + args[1]);
                 return true;
             }
             p.sendMessage("Player is not online...");

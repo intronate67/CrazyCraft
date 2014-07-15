@@ -1,10 +1,7 @@
 package com.crazycraft.dev.CrazyCraft;
 
 import com.crazycraft.dev.CrazyCraft.commands.*;
-import com.crazycraft.dev.CrazyCraft.events.JoinListener;
-import com.crazycraft.dev.CrazyCraft.events.MuteListener;
-import com.crazycraft.dev.CrazyCraft.events.PlayerMoveTimeLock;
-import com.crazycraft.dev.CrazyCraft.events.QuitListener;
+import com.crazycraft.dev.CrazyCraft.events.*;
 import com.crazycraft.dev.CrazyCraft.teleportation.*;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -47,6 +44,7 @@ public class CrazyCraft extends JavaPlugin{
         pm.registerEvents(new JoinListener(), this);
         pm.registerEvents(new PlayerMoveTimeLock(), this);
         pm.registerEvents(new MuteListener(), this);
+        pm.registerEvents(new PlayerInteract(), this);
 
         //Command Executors
         getCommand("give").setExecutor(new Give());

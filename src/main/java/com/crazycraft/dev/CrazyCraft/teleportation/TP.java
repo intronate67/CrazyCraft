@@ -56,6 +56,7 @@ public class TP implements CommandExecutor{
                 p.teleport(loc);
                 p.sendMessage("Teleported " + p.getName() + " to " + targetPlayer.getName());
                 targetPlayer.sendMessage(p.getName() +  " teleported to you.");
+                return true;
             }
             p.sendMessage("Player does not exist an/or is not online!");
             return true;
