@@ -1,6 +1,8 @@
 package com.crazycraft.dev.CrazyCraft.events;
 
+import com.PUUID;
 import com.crazycraft.dev.CrazyCraft.CrazyCraft;
+import com.crazycraft.dev.CrazyCraft.economy.EconManager;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.EventHandler;
@@ -18,6 +20,7 @@ public class JoinListener implements Listener{
     @EventHandler
     public void onPlayerJoinEvent(PlayerJoinEvent e){
         FileConfiguration config = CrazyCraft.getInstance().config;
+        FileConfiguration accounts = CrazyCraft.getInstance().accounts;
         if(config.contains(e.getPlayer().getName())){
             return;
         }
@@ -35,6 +38,8 @@ public class JoinListener implements Listener{
         config.set("players." + e.getPlayer().getName() + ".time.minute", now.getMinutes());
         config.set("players." + e.getPlayer().getName() + ".time.second", now.getSeconds());
         CrazyCraft.getInstance().saveConfig();
+        if(EconManager.hasAccount(e.getPlayer().getName())) return;
+        EconManager.setBalance(e.getPlayer().getName(), 250D);
     }
 
 }

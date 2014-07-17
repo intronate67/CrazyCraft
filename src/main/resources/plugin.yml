@@ -85,3 +85,7 @@ commands:
         description: Teleport to a player with out it telling them.
     tptoggle:
         description: Toggle the ability for player to tp to you.
+    bal:
+        description: Check your balance.
+    balance:
+        description: Check your balance.

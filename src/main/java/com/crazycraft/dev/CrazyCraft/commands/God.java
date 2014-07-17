@@ -40,6 +40,7 @@ public class God implements Listener, CommandExecutor{
             return true;
         }
         isGod.add(p.getUniqueId());
+        p.sendMessage("You are now godded");
         return true;
     }
 

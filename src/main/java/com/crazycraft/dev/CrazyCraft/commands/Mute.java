@@ -31,7 +31,7 @@ public class Mute implements CommandExecutor {
         if(args.length != 1){
             p.sendMessage("Nope");
         }
-        Player targetPlayer = Bukkit.getPlayer(UUID.fromString(PUUID.getUUID(args[0])));
+        Player targetPlayer = Bukkit.getPlayer(PUUID.getUUID(args[0]));
         if(!targetPlayer.isOnline()){
             p.sendMessage("Player is not online.");
             return true;

@@ -43,17 +43,11 @@ public class Freeze implements Listener, CommandExecutor{
         return true;
     }
 
-    public String help(Player p){
-        return "";
-    }
-    public String permission(){
-        return "";
-    }
-
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent e){
         if(isFrozen.contains(e.getPlayer().getUniqueId())){
             e.setTo(e.getFrom());
+            e.setCancelled(true);
         }
     }
 }

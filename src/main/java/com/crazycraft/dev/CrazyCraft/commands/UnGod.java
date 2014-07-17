@@ -17,7 +17,7 @@ public class UnGod implements CommandExecutor {
             return true;
         }
         Player p = (Player) sender;
-        if(args.length != 1){
+        if(args.length != 0){
             p.sendMessage("Incorrect Usage!");
             return true;
         }

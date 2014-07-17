@@ -30,10 +30,10 @@ public class SpawnMob implements CommandExecutor {
             p.sendMessage("You do not have permission!");
             return true;
         }
-        double x = p.getLocation().getDirection().getX();
-        double y = p.getLocation().getDirection().getY();
-        double z = p.getLocation().getDirection().getZ();
-        Location loc = new Location(p.getWorld(), x, y + 1, z);
+        double x = p.getTargetBlock(null, 100).getLocation().getX();
+        double y = p.getTargetBlock(null, 100).getLocation().getY() + 1;
+        double z = p.getTargetBlock(null, 100).getLocation().getZ();
+        Location loc = new Location(p.getWorld(), x, y, z);
         String mob = args[0];
         Mob mobType = Mob.valueOf(args[0]);
         switch (mobType){

@@ -2,6 +2,7 @@ package com.crazycraft.dev.CrazyCraft.commands;
 
 import com.PUUID;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -18,6 +19,10 @@ public class Clear implements CommandExecutor{
             return true;
         }
         Player p = (Player) sender;
+        if(args.length > 2){
+            p.sendMessage(String.format("%sRequired %s- %sOptional", ChatColor.RED, ChatColor.DARK_GRAY, ChatColor.DARK_AQUA, ChatColor.DARK_GRAY, ChatColor.GREEN));
+            p.sendMessage(String.format("%s/clear %[%splayername%s]", ChatColor.RED, ChatColor.DARK_AQUA, ChatColor.RED, ChatColor.DARK_AQUA, ChatColor.RED, ChatColor.GREEN, ChatColor.DARK_AQUA, ChatColor.GREEN));
+        }
         if(args.length == 0){
             p.setItemInHand(null);
             p.sendMessage("Cleared the item in your hand.");
