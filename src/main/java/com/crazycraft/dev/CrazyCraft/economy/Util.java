@@ -7,17 +7,16 @@ import com.crazycraft.dev.CrazyCraft.CrazyCraft;
  */
 public class Util {
 
-    private static CrazyCraft plugin = EconManager.getPlugin();
-
     public static void saveBalances(){
         for(String s : EconManager.getBalanceMap().keySet()){
-            plugin.accounts.set("balance." + s, EconManager.getBalanceMap().get(s));
+            CrazyCraft.getInstance().getConfig().set("balance." + s, EconManager.getBalanceMap().get(s));
         }
-        plugin.saveYaml();
+        CrazyCraft.getInstance().saveYaml();
     }
     public static void loadBalances(){
-        for(String s : plugin.accounts.getConfigurationSection("balance").getKeys(false)){
-            EconManager.setBalance(s, plugin.accounts.getDouble("balance." + s));
+        if(CrazyCraft.getInstance().getConfig().getConfigurationSection("balance").equals(null)) return;
+        for(String s : CrazyCraft.getInstance().getConfig().getConfigurationSection("balance").getKeys(false)){
+            EconManager.setBalance(s, CrazyCraft.getInstance().getConfig().getDouble("balance." + s));
         }
     }
 }

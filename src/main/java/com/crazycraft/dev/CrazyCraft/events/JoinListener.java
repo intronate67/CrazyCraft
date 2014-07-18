@@ -1,6 +1,5 @@
 package com.crazycraft.dev.CrazyCraft.events;
 
-import com.PUUID;
 import com.crazycraft.dev.CrazyCraft.CrazyCraft;
 import com.crazycraft.dev.CrazyCraft.economy.EconManager;
 import org.bukkit.Location;
@@ -20,7 +19,6 @@ public class JoinListener implements Listener{
     @EventHandler
     public void onPlayerJoinEvent(PlayerJoinEvent e){
         FileConfiguration config = CrazyCraft.getInstance().config;
-        FileConfiguration accounts = CrazyCraft.getInstance().accounts;
         if(config.contains(e.getPlayer().getName())){
             return;
         }

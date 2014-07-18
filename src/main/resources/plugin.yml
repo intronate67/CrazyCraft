@@ -7,6 +7,10 @@ commands:
         description: Gamemode command.
     afk:
         description: Afk Command
+    bal:
+        description: Check your balance.
+    balance:
+        description: Check your balance.
     clear:
         description: Clear your inventory.
     fly:
@@ -85,7 +89,3 @@ commands:
         description: Teleport to a player with out it telling them.
     tptoggle:
         description: Toggle the ability for player to tp to you.
-    bal:
-        description: Check your balance.
-    balance:
-        description: Check your balance.

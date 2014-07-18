@@ -14,7 +14,7 @@ import java.util.UUID;
  */
 public class EconManager {
 
-    private static CrazyCraft plugin;
+    private static CrazyCraft plugin = CrazyCraft.getInstance();
 
     public EconManager(CrazyCraft instance){
         plugin = instance;

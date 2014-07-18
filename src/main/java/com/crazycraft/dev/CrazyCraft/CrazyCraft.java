@@ -4,6 +4,7 @@ import com.crazycraft.dev.CrazyCraft.commands.*;
 import com.crazycraft.dev.CrazyCraft.economy.EconManager;
 import com.crazycraft.dev.CrazyCraft.economy.Util;
 import com.crazycraft.dev.CrazyCraft.economy.events.BlockMine;
+import com.crazycraft.dev.CrazyCraft.economy.events.BlockPlace;
 import com.crazycraft.dev.CrazyCraft.economy.events.EntityDeath;
 import com.crazycraft.dev.CrazyCraft.economy.events.PlayerKill;
 import com.crazycraft.dev.CrazyCraft.events.*;
@@ -29,13 +30,14 @@ public class CrazyCraft extends JavaPlugin{
         return instance;
     }
 
-    private int countdown = 0;
-
     public File homeFile;
-    public File accountsFile;
     public FileConfiguration config = getConfig();
     public FileConfiguration homeConf;
-    public FileConfiguration accounts;
+
+    private int blocksMined;
+    private int oresMined;
+    private int playersKilled;
+    private int entitiesKilled;
 
     @Override
     public void onEnable(){
@@ -46,7 +48,6 @@ public class CrazyCraft extends JavaPlugin{
             saveConfig();
         }
         homeFile = new File(getDataFolder(), "homes.yml");
-        accountsFile = new File(getDataFolder(), "accounts.yml");
         //Registering events
         PluginManager pm = Bukkit.getPluginManager();
         pm.registerEvents(new Freeze(), this);
@@ -56,6 +57,10 @@ public class CrazyCraft extends JavaPlugin{
         pm.registerEvents(new PlayerMoveTimeLock(), this);
         pm.registerEvents(new MuteListener(), this);
         pm.registerEvents(new PlayerInteract(), this);
+        pm.registerEvents(new BlockMine(), this);
+        pm.registerEvents(new BlockPlace(), this);
+        pm.registerEvents(new EntityDeath(), this);
+        pm.registerEvents(new PlayerKill(), this);
 
         //Command Executors
         getCommand("give").setExecutor(new Give());
@@ -104,11 +109,24 @@ public class CrazyCraft extends JavaPlugin{
             @Override
             public void run() {
                 for(Player p : Bukkit.getOnlinePlayers()){
-
-                    int blocksMined = BlockMine.getInstance().blocksMined.get(p.getUniqueId());
-                    int oresMined = BlockMine.getInstance().oresMined.get(p.getUniqueId());
-                    int playersKilled = PlayerKill.getInstance().playersKilled.get(p.getUniqueId());
-                    int entitiesKilled = EntityDeath.getInstance().entitiesKilled.get(p.getUniqueId());
+                    if(BlockMine.getInstance().blocksMined.containsKey(p.getUniqueId())){
+                        blocksMined = BlockMine.getInstance().blocksMined.get(p.getUniqueId());
+                    }else{
+                        blocksMined = 0;
+                    }
+                    if(BlockMine.getInstance().oresMined.containsKey(p.getUniqueId())){
+                        oresMined = BlockMine.getInstance().oresMined.get(p.getUniqueId());
+                    }else{
+                        oresMined = 0;
+                    }
+                    if(PlayerKill.getInstance().playersKilled.containsKey(p.getUniqueId())){
+                        playersKilled = PlayerKill.getInstance().playersKilled.get(p.getUniqueId());
+                    }
+                    if(EntityDeath.getInstance().entitiesKilled.containsKey(p.getUniqueId())){
+                        entitiesKilled = EntityDeath.getInstance().entitiesKilled.get(p.getUniqueId());
+                    }else{
+                        entitiesKilled = 0;
+                    }
                     double payday = blocksMined * 0.09 + oresMined * 0.34 + playersKilled * 20 + entitiesKilled * 10;
                     p.sendMessage("[Economy] Blocks Mined: "
                             + blocksMined
@@ -123,11 +141,6 @@ public class CrazyCraft extends JavaPlugin{
                 }
             }
         }, 0L, 12000L);
-
-        new EconManager(this);
-
-        Util.loadBalances();
-
         try{
             loadConfig();
         }catch(Exception e){
@@ -135,19 +148,13 @@ public class CrazyCraft extends JavaPlugin{
         }
         homeConf = new YamlConfiguration();
         homeConf.options().copyDefaults(true);
-        accounts = new YamlConfiguration();
-        accounts.options().copyDefaults(true);
         config.options().copyDefaults(true);
         loadYamls();
-        saveConfig();
         new EconManager(this);
-
-        Util.loadBalances();
-
+        saveConfig();
     }
     @Override
     public void onDisable(){
-        Util.saveBalances();
         saveConfig();
         saveYaml();
     }
@@ -156,10 +163,6 @@ public class CrazyCraft extends JavaPlugin{
         if(!homeFile.exists()){
             homeFile.getParentFile().mkdirs();
             copy(getResource("homes.yml"), homeFile);
-        }
-        if(!accountsFile.exists()){
-            accountsFile.getParentFile().mkdirs();
-            copy(getResource("accounts.yml"), accountsFile);
         }
     }
     private void copy(InputStream in, File file) {
@@ -180,7 +183,6 @@ public class CrazyCraft extends JavaPlugin{
     public void loadYamls() {
         try {//loads the contents of the File to its FileConfiguration
             homeConf.load(homeFile);
-            accounts.load(accountsFile);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -189,7 +191,6 @@ public class CrazyCraft extends JavaPlugin{
     public void saveYaml(){
         try{
             homeConf.save(homeFile);
-            accounts.save(accountsFile);
         }catch(IOException e){
             e.printStackTrace();
         }
