@@ -37,6 +37,8 @@ commands:
         description: Private message a pleyer.
     mute:
         description: Mute that hoe.
+    mail:
+        description: Read your mail.
     playertime:
         description: Set time for you.
     r:

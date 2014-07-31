@@ -30,7 +30,7 @@ public class Slay implements CommandExecutor {
             return true;
         }
 
-        Player targetPlayer = Bukkit.getPlayer(UUID.fromString(PUUID.getUUID(args[0])));
+        Player targetPlayer = Bukkit.getPlayer(PUUID.getUUID(args[0]));
         targetPlayer.setHealth(0);
         targetPlayer.setFireTicks(10);
         Bukkit.getServer().broadcastMessage(ChatColor.BLUE + p.getName() + ChatColor.GRAY +" has slayed " + ChatColor.BLUE +targetPlayer.getName());

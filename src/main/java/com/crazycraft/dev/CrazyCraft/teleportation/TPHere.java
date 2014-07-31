@@ -27,7 +27,13 @@ public class TPHere implements CommandExecutor{
             p.sendMessage("Incorrect usage!");
             return true;
         }
-        Player targetPlayer = Bukkit.getPlayer(PUUID.getUUID(args[0]));
+        String name = null;
+        for(Player player : Bukkit.getOnlinePlayers()){
+            if(player.getName().contains(args[0])){
+                name = player.getName();
+            }
+        }
+        Player targetPlayer = Bukkit.getPlayer(PUUID.getUUID(name));
         if(targetPlayer != null){
             if(TPToggle.getInstance().toggle.contains(targetPlayer.getUniqueId())){
                 p.sendMessage("Player has teleportation disabled!");

@@ -44,6 +44,7 @@ public class TPAccept implements CommandExecutor{
             p.sendMessage("You do not have any current requests!");
             return true;
         }else{
+
             Player requestP = Bukkit.getPlayer(hasRequest.get(p.getName()));
             if(TP.getInstance().prevLoc.containsKey(requestP.getUniqueId())){
                 Location loc = TP.getInstance().prevLoc.get(requestP.getUniqueId());

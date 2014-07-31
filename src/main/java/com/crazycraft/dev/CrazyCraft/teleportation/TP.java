@@ -39,7 +39,13 @@ public class TP implements CommandExecutor{
             return true;
         }
         if(args.length == 1){
-            Player targetPlayer = Bukkit.getPlayer(PUUID.getUUID(args[0]));
+            String name = null;
+            for(Player player : Bukkit.getOnlinePlayers()){
+                if(player.getName().contains(args[0])){
+                    name = player.getName();
+                }
+            }
+            Player targetPlayer = Bukkit.getPlayer(PUUID.getUUID(name));
             if(targetPlayer != null){
                 if(TPToggle.getInstance().toggle.contains(targetPlayer.getUniqueId())){
                     p.sendMessage("Player has teleportation disabled!");
@@ -62,8 +68,20 @@ public class TP implements CommandExecutor{
             return true;
         }
         if(args.length == 2){
-            Player targetPlayer = Bukkit.getPlayer(PUUID.getUUID(args[0]));
-            Player receivingPlayer = Bukkit.getPlayer(PUUID.getUUID(args[1]));
+            String name = null;
+            for(Player player : Bukkit.getOnlinePlayers()){
+                if(player.getName().contains(args[0])){
+                    name = player.getName();
+                }
+            }
+            String otherName = null;
+            for(Player player : Bukkit.getOnlinePlayers()){
+                if(player.getName().contains(args[1])){
+                    otherName = player.getName();
+                }
+            }
+            Player targetPlayer = Bukkit.getPlayer(PUUID.getUUID(name));
+            Player receivingPlayer = Bukkit.getPlayer(PUUID.getUUID(otherName));
             if(targetPlayer != null && receivingPlayer != null){
                 if(TPToggle.getInstance().toggle.contains(targetPlayer.getUniqueId())
                         || TPToggle.getInstance().toggle.contains(receivingPlayer.getUniqueId())){

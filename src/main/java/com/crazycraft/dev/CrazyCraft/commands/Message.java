@@ -2,6 +2,7 @@ package com.crazycraft.dev.CrazyCraft.commands;
 
 import com.PUUID;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -22,18 +23,20 @@ public class Message implements CommandExecutor {
 
         Player p = (Player) sender;
 
-        Player targetPlayer = Bukkit.getPlayer(UUID.fromString(PUUID.getUUID(args[0])));
+        Player targetPlayer = Bukkit.getPlayer(PUUID.getUUID(args[0]));
 
         StringBuilder str = new StringBuilder();
-        for(int i = 0; i < args.length; i++){
-            str.append(args[i]);
+        for(int i = 1; i < args.length; i++){
+            str.append(args[i] + " ");
         }
         String msg = str.toString();
 
         if(!targetPlayer.isOnline()) p.sendMessage("Player is not online");
         //Message to target.
-        targetPlayer.sendMessage("From " + p.getName()+ ": " + msg);
-        p.sendMessage("To " + targetPlayer.getName() + ": " + msg);
+        R.getInstance().hasMessage.put(targetPlayer.getUniqueId(), p.getName());
+        R.getInstance().hasMessage.put(p.getUniqueId(), targetPlayer.getName());
+        targetPlayer.sendMessage(ChatColor.AQUA + "[" + ChatColor.DARK_AQUA +"From " + ChatColor.DARK_RED + p.getName()+ ChatColor.AQUA + "]: " + ChatColor.RED +msg);
+        p.sendMessage(ChatColor.AQUA + "[" + ChatColor.DARK_AQUA + "To " + ChatColor.DARK_RED +targetPlayer.getName() + ChatColor.AQUA +"]: " + ChatColor.RED + msg);
         return true;
     }
 

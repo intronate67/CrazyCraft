@@ -27,7 +27,13 @@ public class TPA implements CommandExecutor{
             p.sendMessage("Incorrect Usage!");
             return true;
         }
-        Player targetPlayer = Bukkit.getPlayer(PUUID.getUUID(args[0]));
+        String name = null;
+        for(Player player : Bukkit.getOnlinePlayers()){
+            if(player.getName().contains(args[0])){
+                name = player.getName();
+            }
+        }
+        Player targetPlayer = Bukkit.getPlayer(PUUID.getUUID(name));
         if(targetPlayer != null){
             TPAccept.getInstance().hasRequest.put(p.getUniqueId(), targetPlayer.getName());
             targetPlayer.sendMessage(p.getName() + " has requested to teleport to you.");

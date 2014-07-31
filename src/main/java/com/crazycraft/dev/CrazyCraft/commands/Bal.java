@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 /**
  * Created by Server on 7/16/2014.
  */
+
 public class Bal implements CommandExecutor{
 
     public boolean onCommand(CommandSender sender, Command cmd, String lable, String[] args){

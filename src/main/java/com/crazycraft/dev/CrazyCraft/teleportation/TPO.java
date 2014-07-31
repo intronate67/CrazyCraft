@@ -27,8 +27,14 @@ public class TPO implements CommandExecutor{
             p.sendMessage("Incorrect Usage!");
             return true;
         }
-        Player targetPlayer = Bukkit.getPlayer(PUUID.getUUID(args[0]));
-        if(targetPlayer != null){
+        String name = null;
+        for(Player player : Bukkit.getOnlinePlayers()){
+            if(player.getName().contains(args[0])){
+                name = player.getName();
+            }
+        }
+        Player targetPlayer = Bukkit.getPlayer(PUUID.getUUID(name));
+        if(Bukkit.getOnlinePlayers().contains(targetPlayer)){
             if(TP.getInstance().prevLoc.containsKey(p.getUniqueId())){
                 Location loc = TP.getInstance().prevLoc.get(p.getUniqueId());
                 TP.getInstance().prevLoc.remove(p.getUniqueId(), loc);
@@ -47,6 +53,7 @@ public class TPO implements CommandExecutor{
                 targetPlayer.sendMessage(p.getName() + " teleported to you.");
                 return true;
             }
+            return true;
         }
         p.sendMessage("Player does not exist and/or is not online!");
         return true;

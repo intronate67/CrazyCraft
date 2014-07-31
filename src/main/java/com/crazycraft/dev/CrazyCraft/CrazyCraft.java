@@ -33,7 +33,6 @@ public class CrazyCraft extends JavaPlugin{
     public File homeFile;
     public FileConfiguration config = getConfig();
     public FileConfiguration homeConf;
-
     private int blocksMined;
     private int oresMined;
     private int playersKilled;
@@ -61,7 +60,6 @@ public class CrazyCraft extends JavaPlugin{
         pm.registerEvents(new BlockPlace(), this);
         pm.registerEvents(new EntityDeath(), this);
         pm.registerEvents(new PlayerKill(), this);
-
         //Command Executors
         getCommand("give").setExecutor(new Give());
         getCommand("afk").setExecutor(new Afk());
@@ -74,6 +72,7 @@ public class CrazyCraft extends JavaPlugin{
         getCommand("god").setExecutor(new God());
         getCommand("home").setExecutor(new Home());
         getCommand("kit").setExecutor(new Kit());
+        getCommand("mail").setExecutor(new Mail());
         getCommand("me").setExecutor(new Me());
         getCommand("msg").setExecutor(new Message());
         getCommand("mute").setExecutor(new Mute());
@@ -104,8 +103,7 @@ public class CrazyCraft extends JavaPlugin{
         getCommand("who").setExecutor(new Who());
         getCommand("list").setExecutor(new Who());
         //Config below
-
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new BukkitRunnable() {
+       /*Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new BukkitRunnable() {
             @Override
             public void run() {
                 for(Player p : Bukkit.getOnlinePlayers()){
@@ -121,6 +119,8 @@ public class CrazyCraft extends JavaPlugin{
                     }
                     if(PlayerKill.getInstance().playersKilled.containsKey(p.getUniqueId())){
                         playersKilled = PlayerKill.getInstance().playersKilled.get(p.getUniqueId());
+                    }else{
+                        playersKilled = 0;
                     }
                     if(EntityDeath.getInstance().entitiesKilled.containsKey(p.getUniqueId())){
                         entitiesKilled = EntityDeath.getInstance().entitiesKilled.get(p.getUniqueId());
@@ -130,17 +130,18 @@ public class CrazyCraft extends JavaPlugin{
                     double payday = blocksMined * 0.09 + oresMined * 0.34 + playersKilled * 20 + entitiesKilled * 10;
                     p.sendMessage("[Economy] Blocks Mined: "
                             + blocksMined
-                            + " Ores Mined: "
+                            + ", Ores Mined: "
                             + oresMined
-                            + " Players Killed: "
+                            + ", Players Killed: "
                             + playersKilled
-                            + " Entities Killed: "
+                            + ", Entities Killed: "
                             + entitiesKilled
-                            + " Paycheck: " + payday);
+                            + ", Paycheck: " + payday);
                     EconManager.setBalance(p.getName(), EconManager.getBalance(p.getName()) + payday);
                 }
             }
         }, 0L, 12000L);
+        */
         try{
             loadConfig();
         }catch(Exception e){
@@ -150,7 +151,7 @@ public class CrazyCraft extends JavaPlugin{
         homeConf.options().copyDefaults(true);
         config.options().copyDefaults(true);
         loadYamls();
-        new EconManager(this);
+        //ew EconManager(this);
         saveConfig();
     }
     @Override
