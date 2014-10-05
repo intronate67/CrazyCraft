@@ -103,7 +103,7 @@ public class CrazyCraft extends JavaPlugin{
         getCommand("who").setExecutor(new Who());
         getCommand("list").setExecutor(new Who());
         //Config below
-       /*Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new BukkitRunnable() {
+       Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new BukkitRunnable() {
             @Override
             public void run() {
                 for(Player p : Bukkit.getOnlinePlayers()){
@@ -141,7 +141,6 @@ public class CrazyCraft extends JavaPlugin{
                 }
             }
         }, 0L, 12000L);
-        */
         try{
             loadConfig();
         }catch(Exception e){
